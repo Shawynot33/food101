@@ -20,7 +20,8 @@ The Food101 dataset contains 101,000 images spanning 101 food categories, with:
 
 The dataset is balanced and reflects real-world variability, with natural, user-generated content. This diversity makes Food101 an excellent benchmark for evaluating the generalisability of pre-trained CNNs.
 
-![Sample Food101 images](images/sample_images)
+Some sample images of the Food 101 dataset:
+![Sample Food101 images](images/sample_images.png)
 
 Example challenges:
 
@@ -62,7 +63,7 @@ THe baseline performance of the three pre-trained CNN architectures was evaluate
 
 MobileNetV3 (large_ was the strongest baseline results.
 
-### Fine Tuning Strategy
+### Fine-Tuning Strategy
 To further improve MobileNetV3, several fine-tuning techniques were applied:
 
 - Gradual unfreezing of feature blocks  
@@ -71,10 +72,36 @@ To further improve MobileNetV3, several fine-tuning techniques were applied:
 - Label smoothing  
 - Early stopping  
 
-![Fine-Tuning Strategy](images/final_model_diagram)
+Diagram of the overall fine-tuning strategy
+![Fine-Tuning Strategy](images/final_model_diagram.png)
 
 ### Fine-Tuned Results
 
+| Model | Test Loss | Test Accuracy |
+|------|----------|--------------|
+| Baseline MobileNetV3 (No Fine-Tuning) | 1.7255 | 55.43% |
+| **Final Fine-Tuned MobileNetV3 (Large)** | **1.6949** | **74.19%** |
+
+Fine-tuning improved test accuracy by **+18.76%**, demonstrating the effectiveness of transfer learning combined with targeted optimisation strategies on the Food101 dataset.
+
+The following curve shows training and validation loss convergence, with early stopping applied to prevent overfitting.
+
+![Final Model Loss Curve](assets/final_model_curve.png)
+
+## Key Learnings
+- Transfer learning provides strong baseline performance even on complex datasets like Food101.
+- MobileNetV3 generalised better than GoogLeNet and ResNet50 under the same training setup.
+- Fine-tuning deeper feature blocks significantly improved accuracy (+18.76%).
+- Regularisation techniques such as label smoothing and dropout helped reduce overfitting.
+- Differential learning rates were essential for stable convergence when unfreezing layers.
+
+## Future Improvements
+
+- Apply stronger data augmentation (RandAugment, MixUp, CutMix) to improve robustness.
+- Explore larger architectures such as EfficientNet or ConvNeXt.
+- Evaluate Top-5 accuracy, which is often more meaningful for 101-class classification.
+- Perform hyperparameter optimisation (learning rate schedules, weight decay tuning).
+- Deploy the model in a simple Streamlit web app for real-world usability.
 
 
 ## Repository Contents
@@ -84,8 +111,11 @@ food101/
 ├── different_architectures.ipynb  # Notebook with experiments testing different pre-trained model archiectures
 ├── MobileNetV3.ipynb              # Notebook with fine-tuning MobileNetV3 (final model)
 ├── README.md                      # Project overview and results
+├── requirements.txt               # Dependencies
 ├── images/
-    └── food101_samples.png        # Example dataset images
+    └── final_model_curve.png      # Loss and Accuracy curve
+    └── final_model_diagram.png    # Fine-tuning diagram
+    └── sample_images.png          # Example dataset images
 ```
 
 ## How to Run
