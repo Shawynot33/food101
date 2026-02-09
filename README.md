@@ -86,7 +86,7 @@ Fine-tuning improved test accuracy by **+18.76%**, demonstrating the effectivene
 
 The following curve shows training and validation loss convergence, with early stopping applied to prevent overfitting.
 
-![Final Model Loss Curve](assets/final_model_curve.png)
+![Final Model Loss Curve](images/final_model_curve.png)
 
 ## Key Learnings
 - Transfer learning provides strong baseline performance even on complex datasets like Food101.
