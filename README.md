@@ -20,6 +20,8 @@ The Food101 dataset contains 101,000 images spanning 101 food categories, with:
 
 The dataset is balanced and reflects real-world variability, with natural, user-generated content. This diversity makes Food101 an excellent benchmark for evaluating the generalisability of pre-trained CNNs.
 
+![Sample Food101 images](images/sample_images)
+
 Example challenges:
 
 * Images often include distracting elements (e.g., people in the frame)
@@ -34,6 +36,46 @@ These factors require models to learn robust and generalisable features.
 | **GoogLeNet**           | Inception modules with multi-scale feature extraction         |
 | **MobileNetV3 (Large)** | Lightweight, efficient, uses depthwise separable convolutions |
 | **ResNet50**            | Residual connections for training deep networks effectively   |
+
+## Project Workflow
+
+**1. Baseline Evaluation:** Apply transfer learning to all three architectures without fine-tuning.
+
+**2. Performance Comparison:** Identify the most primising architecture based on validation accuracy.
+
+**3. Fine-Tuning:** Improve classification performance by training the last few layers of the selected model.
+
+**4. Analysis & Insights:** Evaluate limitations, overfitting, and challenges in the Food101 dataset.
+
+
+## Results
+
+### Baseline Transfer Learning Results
+THe baseline performance of the three pre-trained CNN architectures was evaluated on the Food101 test set:
+
+
+| Model                   | Test Loss  | Test Accuracy |
+| ----------------------- | ---------- | ------------- |
+| GoogLeNet               | 2.1182     | 46.30%        |
+| ResNet50                | 1.8236     | 52.05%        |
+| **MobileNetV3 (Large)** | **1.7255** | **55.43%**    |
+
+MobileNetV3 (large_ was the strongest baseline results.
+
+### Fine Tuning Strategy
+To further improve MobileNetV3, several fine-tuning techniques were applied:
+
+- Gradual unfreezing of feature blocks  
+- Differential learning rates  
+- BatchNorm + Dropout  
+- Label smoothing  
+- Early stopping  
+
+![Fine-Tuning Strategy](images/final_model_diagram)
+
+### Fine-Tuned Results
+
+
 
 ## Repository Contents
 ```
